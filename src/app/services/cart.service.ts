@@ -17,7 +17,10 @@ export class CartService {
     if (existingItem) {
       existingItem.quantity++;
     } else {
-      currentItems.push({ product, quantity: 1 });
+      currentItems.push({
+        product: { id: product.id, name: product.nome, price: product.preco },
+        quantity: 1,
+      });
     }
 
     this.cartItemsSubject.next([...currentItems]);

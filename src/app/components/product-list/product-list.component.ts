@@ -48,7 +48,6 @@ export class ProductListComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts().subscribe({
       next: (products) => {
-        console.log('produtos->', products[0]);
         this.products = products;
         this.filteredProducts = products;
         this.marcas = [...new Set(products.map((p) => p.marca))];

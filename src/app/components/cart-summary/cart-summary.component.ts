@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-cart-summary',
@@ -28,31 +29,57 @@ export class CartSummaryComponent {
   }
 
   checkout() {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.orderService.createOrder(items).subscribe({
-        next: (order) => {
+    this.cartService.cartItems$
+      .pipe(
+        take(1), // pega só o valor atual
+        switchMap((items) => this.orderService.createOrder(items))
+      )
+      .subscribe(
+        (order: any) => {
           this.snackBar.open(
             `Pedido #${order.id} realizado com sucesso!`,
             'Fechar',
-            {
-              duration: 5000,
-              panelClass: ['success-snackbar'],
-            }
+            { duration: 5000, panelClass: ['success-snackbar'] }
           );
           this.cartService.clearCart();
           this.router.navigate(['/order-success', order.id]);
         },
-        error: (error) => {
+        (err: any) => {
           this.snackBar.open(
-            `Erro ao finalizar pedido: ${error.message}`,
+            `Erro ao finalizar pedido: ${err.message}`,
             'Fechar',
-            {
-              duration: 5000,
-              panelClass: ['error-snackbar'],
-            }
+            { duration: 5000, panelClass: ['error-snackbar'] }
           );
-        },
-      });
-    });
+        }
+      );
   }
+
+  // checkout() {
+  //   this.cartService.cartItems$.subscribe((items) => {
+  //     this.orderService.createOrder(items).subscribe({
+  //       next: (order) => {
+  //         this.snackBar.open(
+  //           `Pedido #${order.id} realizado com sucesso!`,
+  //           'Fechar',
+  //           {
+  //             duration: 5000,
+  //             panelClass: ['success-snackbar'],
+  //           }
+  //         );
+  //         this.cartService.clearCart();
+  //         this.router.navigate(['/order-success', order.id]);
+  //       },
+  //       error: (error) => {
+  //         this.snackBar.open(
+  //           `Erro ao finalizar pedido: ${error.message}`,
+  //           'Fechar',
+  //           {
+  //             duration: 5000,
+  //             panelClass: ['error-snackbar'],
+  //           }
+  //         );
+  //       },
+  //     });
+  //   });
+  // }
 }

@@ -1,0 +1,81 @@
+/* src/app/components/order-success/order-success.component.scss */
+.order-success-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+  .success-card {
+    padding: 20px;
+
+    .success-icon {
+      color: #4caf50;
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .order-info {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+
+      .status-badge {
+        background-color: #4caf50;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    .order-summary {
+      margin-top: 20px;
+
+      .items-list {
+        margin: 20px 0;
+
+        .item-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 0;
+          border-bottom: 1px solid #f5f5f5;
+
+          .item-info {
+            display: flex;
+            gap: 10px;
+
+            .quantity {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      .order-total {
+        text-align: right;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .error-card {
+    text-align: center;
+    padding: 30px;
+
+    mat-icon {
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #f44336;
+    }
+  }
+}

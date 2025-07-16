@@ -1,6 +1,7 @@
-<!-- product-item.component.html -->
 <mat-card class="product-card">
-  <img mat-card-image [src]="product.imagem" alt="{{ product.nome }}">
+  @if (product) {
+  <img [src]="getSafeImage(product.imagem)" alt="{{ product.nome }}" (error)="handleImageError($event)"
+    class="product-image">
 
   <mat-card-content>
     <h3>{{ product.nome }}</h3>
@@ -21,4 +22,10 @@
     </button>
     }
   </mat-card-actions>
+  }@else {
+  <div class="skeleton-loader">
+    <div class="image-placeholder"></div>
+    <div class="text-placeholder"></div>
+  </div>
+  }
 </mat-card>

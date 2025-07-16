@@ -1,9 +1,18 @@
-import { CartItem } from './cart-item.model';
-
+// src/app/models/order.model.ts
 export interface Order {
   id: string;
-  items: CartItem[];
+  items: {
+    product: {
+      id: number;
+      name: string;
+      price: number;
+      imageUrl?: string;
+    };
+    quantity: number;
+  }[];
   total: number;
   status: 'pending' | 'completed' | 'failed';
-  createdAt: Date;
+  createdAt: string;
+  customerName?: string;
+  shippingAddress?: string;
 }

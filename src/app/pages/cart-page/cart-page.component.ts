@@ -35,7 +35,7 @@ export class CartPageComponent {
   getTotal(): number {
     return this.cartService
       .getCartItems()
-      .reduce((sum, item) => sum + item.product.preco * item.quantity, 0);
+      .reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   }
 
   proceedToCheckout(): void {

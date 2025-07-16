@@ -1,0 +1,60 @@
+<!-- src/app/components/order-success/order-success.component.html -->
+<div class="order-success-container">
+  @if (isLoading) {
+  <mat-spinner diameter="50"></mat-spinner>
+  } @else if (orderDetails) {
+  <mat-card class="success-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        Pedido Realizado com Sucesso!
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="order-info">
+        <h3>Número do Pedido: <strong>#{{ orderDetails.id }}</strong></h3>
+        <p>Data: {{ formatDate(orderDetails.createdAt) }}</p>
+        <p>Status: <span class="status-badge">{{ orderDetails.status | uppercase }}</span></p>
+      </div>
+
+      <div class="order-summary">
+        <h3>Resumo do Pedido</h3>
+        <div class="items-list">
+          @for (item of orderDetails.items; track item.product.id) {
+          <div class="item-row">
+            <div class="item-info">
+              <span class="quantity">{{ item.quantity }}x</span>
+              <span class="name">{{ item.product.name }}</span>
+            </div>
+            <div class="item-price">{{ (item.product.price * item.quantity) | currency:'BRL' }}</div>
+          </div>
+          }
+        </div>
+
+        <div class="order-total">
+          <h3>Total: {{ getOrderTotal() | currency:'BRL' }}</h3>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="continueShopping()">
+        <mat-icon>shopping_basket</mat-icon>
+        Continuar Comprando
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  } @else {
+  <mat-card class="error-card">
+    <mat-card-content>
+      <mat-icon color="warn">error</mat-icon>
+      <h3>Pedido não encontrado</h3>
+      <p>O pedido solicitado não foi encontrado em nosso sistema.</p>
+      <button mat-raised-button color="primary" (click)="continueShopping()">
+        Voltar à Loja
+      </button>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>
