@@ -12,5 +12,59 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Roboto", sans-serif;
+}
+// Tema escuro opcional
+.dark-theme {
+  background-color: #303030;
+  color: white;
+
+  .product-card {
+      background-color: #424242;
+      color: #f5f5f5;
+      border: 1px solid #555;
+
+      .price {
+        color: #bb86fc; // Roxo claro para preços
+      }
+
+      .brand {
+        color: #b3e5fc; // Azul claro para marcas
+      }
+
+      .mat-raised-button {
+        background-color: #bb86fc; // Roxo Material Design dark
+        color: #000;
+      }
+
+      .unavailable {
+        color: #ff8a80; // Vermelho claro para indisponível
+      }
+    }
+
+    // Botões do carrinho no rodapé
+    .cart-summary {
+      background-color: #424242;
+      border-top: 1px solid #555;
+
+      button {
+        &.mat-raised-button {
+          &[color="primary"] {
+            background-color: #3700b3; // Azul mais escuro
+            color: white;
+          }
+
+          &[color="accent"] {
+            background-color: #03dac6;
+            color: #000;
+          }
+        }
+      }
+    }
+}
+// Transições suaves para o tema
+.mat-card,
+.cart-summary,
+button {
+  transition: background-color 0.5s ease, color 0.3s ease;
 }

@@ -38,21 +38,32 @@ export class ProductListComponent implements OnInit {
   marcas: string[] = [];
   searchTerm = '';
   selectedMarca = '';
-
+  lastUpdated: Date | null = null;
+  isLoading = false;
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
-  loadProducts(): void {
-    this.productService.getProducts().subscribe({
+  loadProducts(forceRefresh = false): void {
+    this.isLoading = true;
+
+    (forceRefresh
+      ? this.productService.forceRefresh()
+      : this.productService.getProducts()
+    ).subscribe({
       next: (products) => {
         this.products = products;
         this.filteredProducts = products;
         this.marcas = [...new Set(products.map((p) => p.marca))];
+        this.lastUpdated = new Date();
+        this.isLoading = false;
       },
-      error: (error) => console.error('Erro ao carregar produtos', error),
+      error: (error) => {
+        console.error('Erro ao carregar produtos', error);
+        this.isLoading = false;
+      },
     });
   }
 

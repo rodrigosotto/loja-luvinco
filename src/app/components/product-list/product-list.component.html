@@ -1,4 +1,16 @@
 <div class="product-store">
+  <div class="header-controls">
+    <h1>Loja de Produtos</h1>
+
+    <div class="refresh-controls">
+      @if(lastUpdated) {
+      <small>Atualizado em: {{ lastUpdated | date:'dd/MM/yyyy HH:mm' }}</small>
+      }
+      <button mat-icon-button (click)="loadProducts(true)" matTooltip="Forçar atualização">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
   <div class="filters mat-elevation-z2">
     <mat-form-field appearance="outline">
       <mat-label>Pesquisar produtos...</mat-label>

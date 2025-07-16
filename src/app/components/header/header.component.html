@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <div class="header-content">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="TESTE LUVICON" height="40">
+    </div>
+
+    <button mat-icon-button (click)="toggleTheme()" aria-label="Alternar tema">
+      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
