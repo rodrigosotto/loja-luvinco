@@ -1,1 +1,16 @@
-<p>product-list works!</p>
+<div class="product-store">
+  <div class="filters">
+    <input type="text" placeholder="Pesquisar produtos..." [(ngModel)]="searchTerm" (input)="applyFilters()">
+
+    <select [(ngModel)]="selectedMarca" (change)="applyFilters()">
+      <option value="">Todas as marcas</option>
+      <option *ngFor="let marca of marcas" [value]="marca">{{ marca }}</option>
+    </select>
+  </div>
+
+  <div class="products-grid">
+    @for (product of filteredProducts; track product.id) {
+    <app-product-item [product]="product"></app-product-item>
+    }
+  </div>
+</div>

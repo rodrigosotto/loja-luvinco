@@ -1,1 +1,7 @@
-<p>cart-summary works!</p>
+<div class="cart-summary">
+  <div class="items-count">{{ cartService.getTotalItems() }} itens adicionados</div>
+  <div class="actions">
+    <button (click)="viewCart()" class="view-cart">Ver Carrinho</button>
+    <button (click)="checkout()" class="checkout">Finalizar Pedido</button>
+  </div>
+</div>

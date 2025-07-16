@@ -1,11 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product.model';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ProductItemComponent],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  marcas: string[] = [];
+  searchTerm = '';
+  selectedMarca = '';
 
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        console.log('produtos->', products[0]);
+        this.products = products;
+        this.filteredProducts = products;
+        this.marcas = [...new Set(products.map((p) => p.marca))];
+      },
+      error: (error) => console.error('Erro ao carregar produtos', error),
+    });
+  }
+
+  applyFilters(): void {
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesSearch = product.nome
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+      const matchesmarca = this.selectedMarca
+        ? product.marca === this.selectedMarca
+        : true;
+      return matchesSearch && matchesmarca;
+    });
+  }
 }

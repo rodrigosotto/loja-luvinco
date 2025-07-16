@@ -40,4 +40,24 @@ export class CartService {
       0
     );
   }
+
+  getCartItems(): CartItem[] {
+    return [...this.cartItemsSubject.value];
+  }
+
+  updateQuantity(productId: number, quantity: number): void {
+    if (quantity < 1) {
+      this.removeFromCart(productId);
+      return;
+    }
+
+    const items = this.cartItemsSubject.value.map((item) => {
+      if (item.product.id === productId) {
+        return { ...item, quantity };
+      }
+      return item;
+    });
+
+    this.cartItemsSubject.next(items);
+  }
 }

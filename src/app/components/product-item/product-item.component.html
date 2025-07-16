@@ -1,11 +1,12 @@
 <div class="product-card">
+    <img [src]="product.imagem" alt="{{ product.nome }}" class="product-image">
   <div class="product-info">
-    <h3>{{ product.name }}</h3>
-    <p class="price">R$ {{ product.price | number:'1.2-2' }}</p>
-    <p class="brand">{{ product.brand }}</p>
+    <h3>{{ product.nome }}</h3>
+    <p class="price">R$ {{ product.preco | number:'1.2-2' }}</p>
+    <p class="brand">{{ product.marca }}</p>
   </div>
 
-  @if (product.available) {
+  @if (product.disponivel) {
   <button (click)="addToCart()" class="add-button">
     + Adicionar
   </button>
