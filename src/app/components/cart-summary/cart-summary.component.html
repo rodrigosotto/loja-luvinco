@@ -1,7 +1,23 @@
-<div class="cart-summary">
-  <div class="items-count">{{ cartService.getTotalItems() }} itens adicionados</div>
-  <div class="actions">
-    <button (click)="viewCart()" class="view-cart">Ver Carrinho</button>
-    <button (click)="checkout()" class="checkout">Finalizar Pedido</button>
-  </div>
+<!-- src/app/components/cart-summary/cart-summary.component.html -->
+<div class="cart-summary mat-elevation-z6">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="viewCart()"
+    matBadge="{{ cartService.getTotalItems() }}"
+    matBadgeColor="accent"
+    matBadgePosition="before"
+    [disabled]="cartService.getTotalItems() === 0">
+    <mat-icon>shopping_cart</mat-icon>
+    Ver Carrinho ({{ cartService.getTotalItems() }})
+  </button>
+
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="checkout()"
+    [disabled]="cartService.getTotalItems() === 0">
+    <mat-icon>check_circle</mat-icon>
+    Finalizar Pedido
+  </button>
 </div>

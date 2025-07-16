@@ -1,10 +1,39 @@
+/* product-item.component.scss */
 .product-card {
-  .product-image {
-    width: 100%;
-    height: 150px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  mat-card-content {
+    flex-grow: 1;
+
+    h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #e91e63;
+      margin: 5px 0;
+    }
+
+    .brand {
+      color: #666;
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
+  }
+
+  .unavailable {
+    color: #f44336;
+  }
+
+  img {
+    max-height: 200px;
     object-fit: contain;
-    margin-bottom: 10px;
-    border-radius: 4px;
     background-color: #f9f9f9;
   }
 }

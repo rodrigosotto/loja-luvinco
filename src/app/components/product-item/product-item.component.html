@@ -1,16 +1,24 @@
-<div class="product-card">
-    <img [src]="product.imagem" alt="{{ product.nome }}" class="product-image">
-  <div class="product-info">
-    <h3>{{ product.nome }}</h3>
-    <p class="price">R$ {{ product.preco | number:'1.2-2' }}</p>
-    <p class="brand">{{ product.marca }}</p>
-  </div>
+<!-- product-item.component.html -->
+<mat-card class="product-card">
+  <img mat-card-image [src]="product.imagem" alt="{{ product.nome }}">
 
-  @if (product.disponivel) {
-  <button (click)="addToCart()" class="add-button">
-    + Adicionar
-  </button>
-  } @else {
-  <p class="unavailable">Indisponível</p>
-  }
-</div>
+  <mat-card-content>
+    <h3>{{ product.nome }}</h3>
+    <p class="price">{{ product.preco | currency:'BRL' }}</p>
+    <p class="brand">{{ product.marca }}</p>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    @if (product.disponivel) {
+    <button mat-raised-button color="primary" (click)="addToCart()">
+      <mat-icon>add_shopping_cart</mat-icon>
+      Adicionar
+    </button>
+    } @else {
+    <button mat-button disabled class="unavailable">
+      <mat-icon>block</mat-icon>
+      Indisponível
+    </button>
+    }
+  </mat-card-actions>
+</mat-card>

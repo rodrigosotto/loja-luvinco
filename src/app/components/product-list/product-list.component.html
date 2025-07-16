@@ -1,16 +1,33 @@
 <div class="product-store">
-  <div class="filters">
-    <input type="text" placeholder="Pesquisar produtos..." [(ngModel)]="searchTerm" (input)="applyFilters()">
+  <div class="filters mat-elevation-z2">
+    <mat-form-field appearance="outline">
+      <mat-label>Pesquisar produtos...</mat-label>
+      <input matInput type="text" [(ngModel)]="searchTerm" (input)="applyFilters()">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
 
-    <select [(ngModel)]="selectedMarca" (change)="applyFilters()">
-      <option value="">Todas as marcas</option>
-      <option *ngFor="let marca of marcas" [value]="marca">{{ marca }}</option>
-    </select>
+    <mat-form-field appearance="outline">
+      <mat-label>Marca</mat-label>
+      <mat-select [(ngModel)]="selectedMarca" (selectionChange)="applyFilters()">
+        <mat-option value="">Todas as marcas</mat-option>
+        <mat-option *ngFor="let marca of marcas" [value]="marca">
+          {{ marca }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
+  @if (filteredProducts.length > 0) {
   <div class="products-grid">
     @for (product of filteredProducts; track product.id) {
     <app-product-item [product]="product"></app-product-item>
     }
   </div>
+  } @else {
+  <mat-card class="no-results">
+    <mat-card-content>
+      Nenhum produto encontrado com os filtros atuais
+    </mat-card-content>
+  </mat-card>
+  }
 </div>

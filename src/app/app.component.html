@@ -4,15 +4,9 @@
   </header>
 
   <main class="main-content">
-    <div class="product-section">
-      <h2>Produtos Disponíveis</h2>
-      <app-product-list></app-product-list>
-    </div>
-
-    <div class="cart-section">
-      <h2>Carrinho de Compras</h2>
-      <app-cart-summary></app-cart-summary>
-    </div>
+<router-outlet></router-outlet>
+<app-cart-summary></app-cart-summary>
+<!-- <app-message></app-message> -->
   </main>
 
   <footer class="footer">
