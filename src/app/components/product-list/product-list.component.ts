@@ -42,7 +42,7 @@ export class ProductListComponent implements OnInit {
   isLoading = false;
   constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadProducts();
   }
 
@@ -61,6 +61,7 @@ export class ProductListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
+        //adicionar um alert para informar o usuario que ocorreu um problema ao carregar produtos
         console.error('Erro ao carregar produtos', error);
         this.isLoading = false;
       },

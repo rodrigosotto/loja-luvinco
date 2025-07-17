@@ -1,4 +1,3 @@
-// cart-page.component.ts
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CurrencyPipe } from '@angular/common';
@@ -7,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart-page',
@@ -30,7 +30,11 @@ export class CartPageComponent {
     'actions',
   ];
 
-  constructor(public cartService: CartService, private router: Router) {}
+  constructor(
+    public cartService: CartService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   getTotal(): number {
     return this.cartService
@@ -38,8 +42,15 @@ export class CartPageComponent {
       .reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   }
 
-  proceedToCheckout(): void {
-    this.router.navigate(['/checkout']);
+  proceedToCheckout() {
+    this.snackBar.open(
+      'Para este desafio, não foi solicitado página do CHECKOUT',
+      'Fechar',
+      {
+        duration: 5000,
+      }
+    ),
+      this.router.navigate(['/']);
   }
   goToHome() {
     this.router.navigate(['/']);
