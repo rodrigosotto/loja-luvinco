@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap, take } from 'rxjs';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -33,7 +35,8 @@ export class CartPageComponent {
   constructor(
     public readonly cartService: CartService,
     private readonly router: Router,
-    private readonly snackBar: MatSnackBar
+    private readonly snackBar: MatSnackBar,
+    private readonly orderService: OrderService
   ) {}
 
   getTotal(): number {
@@ -50,7 +53,33 @@ export class CartPageComponent {
         duration: 5000,
       }
     ),
-      this.router.navigate(['/']);
+      this.checkout();
+  }
+
+  checkout() {
+    this.cartService.cartItems$
+      .pipe(
+        take(1),
+        switchMap((items) => this.orderService.createOrder(items))
+      )
+      .subscribe(
+        (order: any) => {
+          this.snackBar.open(
+            `Pedido #${order.id} realizado com sucesso!`,
+            'Fechar',
+            { duration: 5000, panelClass: ['success-snackbar'] }
+          );
+          this.cartService.clearCart();
+          this.router.navigate(['/order-success', order.id]);
+        },
+        (err: any) => {
+          this.snackBar.open(
+            `Erro ao finalizar pedido: ${err.message}`,
+            'Fechar',
+            { duration: 5000, panelClass: ['error-snackbar'] }
+          );
+        }
+      );
   }
   goToHome() {
     this.router.navigate(['/']);

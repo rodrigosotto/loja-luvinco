@@ -1,0 +1,51 @@
+:host {
+  display: block;
+    width: 100%;
+    margin-top: auto;
+
+}
+
+.footer {
+  height: 60px;
+    display: flex;
+    justify-content: center;
+    padding: 0 16px;
+    background: #435943;
+    /* Cor primary do Material */
+    color: white;
+
+  .footer-content {
+width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  }
+
+  .copyright {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 16px;
+
+    a {
+      color: inherit;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+body {
+  margin-bottom: 60px;
+}

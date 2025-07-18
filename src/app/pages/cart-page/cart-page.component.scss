@@ -3,6 +3,10 @@
   margin: 20px auto;
   padding: 0 20px;
 
+  mat-card-header {
+    padding: 20px;
+  }
+
   .product-info {
     display: flex;
     align-items: center;
@@ -31,6 +35,7 @@
   .cart-total {
     text-align: right;
     margin-top: 20px;
+    margin-bottom: 20px;
     padding-top: 20px;
     border-top: 1px solid #eee;
 

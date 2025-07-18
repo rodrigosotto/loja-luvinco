@@ -5,10 +5,9 @@
     </div>
 
     <button mat-icon-button (click)="toggleTheme()" aria-label="Alternar tema">
-      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <mat-icon style="color: aliceblue;">{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
     <button mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
       <span>Sair</span>
     </button>
   </div>
