@@ -53,7 +53,9 @@ export class CartPageComponent {
         duration: 5000,
       }
     ),
-      this.checkout();
+      setTimeout(() => {
+        this.checkout();
+      }, 5000);
   }
 
   checkout() {

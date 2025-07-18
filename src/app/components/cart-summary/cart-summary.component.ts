@@ -56,7 +56,7 @@ export class CartSummaryComponent implements OnInit {
       .subscribe(
         (order: any) => {
           this.snackBar.open(
-            `Pedido #${order.id} realizado com sucesso!`,
+            `Pedido #${order.pedidoId} realizado com sucesso!`,
             'Fechar',
             { duration: 5000, panelClass: ['success-snackbar'] }
           );
