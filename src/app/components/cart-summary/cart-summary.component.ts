@@ -56,6 +56,7 @@ export class CartSummaryComponent implements OnInit {
       )
       .subscribe(
         (order: any) => {
+          console.log(order);
           this.snackBar.open(
             `Pedido #${order.id} realizado com sucesso!`,
             'Fechar',

@@ -21,13 +21,17 @@ export class AuthService {
     }
   }
 
+  private setAuthData(response: any) {
+    localStorage.setItem('currentUser', JSON.stringify(response.usuario));
+    localStorage.setItem('token', response.token);
+    this.currentUserSubject.next(response.usuario);
+  }
+
   login(email: string, senha: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, senha }).pipe(
       tap((response: any) => {
         if (response.success) {
-          localStorage.setItem('currentUser', JSON.stringify(response.usuario));
-          localStorage.setItem('token', response.token);
-          this.currentUserSubject.next(response.usuario);
+          this.setAuthData(response);
         }
       })
     );

@@ -6,17 +6,32 @@ import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  //criar rota para carrinho de compra
   {
     path: '',
-    component: ProductListComponent,
-    canActivate: [authGuard],
+    redirectTo: '/login',
     pathMatch: 'full',
   },
-  { path: 'cart', component: CartPageComponent, canActivate: [authGuard] },
-  { path: 'order-success/:id', component: OrderSuccessComponent },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'products',
+    component: ProductListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'cart',
+    component: CartPageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'order-success/:id',
+    component: OrderSuccessComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '/login',
   },
 ];

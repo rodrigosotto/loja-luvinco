@@ -9,23 +9,37 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
-
   loading = false;
   error = '';
+  hidePassword = true;
+
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private authService: AuthService,
     private router: Router
   ) {
@@ -33,6 +47,13 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required],
     });
+  }
+
+  ngOnInit() {
+    // Se já estiver logado, redireciona para a página principal
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/products']);
+    }
   }
 
   onSubmit() {
@@ -43,10 +64,12 @@ export class LoginComponent {
 
     const { email, senha } = this.loginForm.value;
 
-    this.authService.login(email!, senha!).subscribe({
+    this.authService.login(email, senha).subscribe({
       next: () => {
+        // Obtém a URL de redirecionamento dos query params ou usa '/products' como padrão
         const returnUrl =
-          this.router.parseUrl(this.router.url).queryParams['returnUrl'] || '/';
+          this.router.parseUrl(this.router.url).queryParams['returnUrl'] ||
+          '/products';
         this.router.navigateByUrl(returnUrl);
       },
       error: (err) => {

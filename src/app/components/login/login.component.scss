@@ -1,0 +1,35 @@
+.login-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+
+    .spacer {
+      flex: 1;
+    }
+  }
+
+  mat-spinner {
+    margin: 0 auto;
+  }
+
+  mat-card {
+    mat-card-title {
+      margin-bottom: 2rem;
+    }
+  }
+}
