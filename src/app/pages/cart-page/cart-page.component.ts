@@ -31,9 +31,9 @@ export class CartPageComponent {
   ];
 
   constructor(
-    public cartService: CartService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    public readonly cartService: CartService,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   getTotal(): number {

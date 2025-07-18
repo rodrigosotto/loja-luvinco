@@ -1,0 +1,18 @@
+<div class="logout-container">
+  <mat-card>
+    <mat-card-content>
+      <div *ngIf="isLoading" class="spinner-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Saindo do sistema...</p>
+      </div>
+
+      <div *ngIf="!isLoading" class="success-message">
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <p>Você foi desconectado com sucesso</p>
+        <button mat-raised-button color="primary" routerLink="/login">
+          Voltar ao Login
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

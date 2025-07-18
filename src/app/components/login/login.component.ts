@@ -39,9 +39,9 @@ export class LoginComponent {
   hidePassword = true;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -50,9 +50,8 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    // Se já estiver logado, redireciona para a página principal
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/products']);
+      this.router.navigate(['/produtos']);
     }
   }
 
@@ -66,10 +65,9 @@ export class LoginComponent {
 
     this.authService.login(email, senha).subscribe({
       next: () => {
-        // Obtém a URL de redirecionamento dos query params ou usa '/products' como padrão
         const returnUrl =
           this.router.parseUrl(this.router.url).queryParams['returnUrl'] ||
-          '/products';
+          '/produtos';
         this.router.navigateByUrl(returnUrl);
       },
       error: (err) => {

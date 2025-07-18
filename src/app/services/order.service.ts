@@ -10,7 +10,7 @@ import { OrderItem } from '../models/order-item.model';
 export class OrderService {
   private apiUrl = `${environment.apiUrl}/pedidos`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   createOrder(cartItems: CartItem[]) {
     const payload: OrderItem[] = cartItems.map((i) => ({

@@ -1,4 +1,3 @@
-// message.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageService } from '../../services/message.service';
@@ -13,7 +12,7 @@ import { MessageService } from '../../services/message.service';
 export class MessageComponent {
   message: any = null;
 
-  constructor(private messageService: MessageService) {
+  constructor(private readonly messageService: MessageService) {
     this.messageService.messages$.subscribe((msg) => {
       this.message = msg;
     });

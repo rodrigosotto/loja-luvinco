@@ -1,4 +1,3 @@
-// src/app/models/order.model.ts
 export interface Order {
   id: string;
   items: {

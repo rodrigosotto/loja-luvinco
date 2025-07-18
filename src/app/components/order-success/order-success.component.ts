@@ -1,4 +1,3 @@
-// src/app/components/order-success/order-success.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
@@ -29,9 +28,9 @@ export class OrderSuccessComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(
-    private route: ActivatedRoute,
-    private orderService: OrderService,
-    private router: Router
+    private readonly route: ActivatedRoute,
+    private readonly orderService: OrderService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {

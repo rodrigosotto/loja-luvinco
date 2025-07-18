@@ -20,7 +20,7 @@ export class CartService {
   private readonly LATEST_VERIFICATION_KEY = 'ultima_verificacao_precos';
   private dailyCheckInterval: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     this.loadCartSalved();
     this.checkChangeDay();
   }
@@ -72,7 +72,6 @@ export class CartService {
             this.LATEST_VERIFICATION_KEY,
             agora.toISOString()
           );
-          console.log('Preços verificados e atualizados com sucesso');
         },
         error: (err) => console.error('Erro ao verificar atualizações:', err),
       });

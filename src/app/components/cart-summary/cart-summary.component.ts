@@ -20,19 +20,18 @@ export class CartSummaryComponent implements OnInit {
   carrinho$: Observable<CartItem[]> | undefined;
 
   constructor(
-    public cartService: CartService,
-    private orderService: OrderService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    public readonly cartService: CartService,
+    private readonly orderService: OrderService,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    // Verifica atualizações ao inicializar
     this.carrinho$ = this.cartService.checkUpdates();
   }
 
   viewCart() {
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/carrinho']);
   }
 
   updateCart() {
@@ -51,12 +50,11 @@ export class CartSummaryComponent implements OnInit {
   checkout() {
     this.cartService.cartItems$
       .pipe(
-        take(1), // pega só o valor atual
+        take(1),
         switchMap((items) => this.orderService.createOrder(items))
       )
       .subscribe(
         (order: any) => {
-          console.log(order);
           this.snackBar.open(
             `Pedido #${order.id} realizado com sucesso!`,
             'Fechar',

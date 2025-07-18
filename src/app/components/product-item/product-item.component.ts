@@ -17,7 +17,7 @@ export class ProductItemComponent {
   @Input() product!: Product;
   placeholderImage = 'assets/images/placeholder.png';
 
-  constructor(private cartService: CartService) {}
+  constructor(private readonly cartService: CartService) {}
 
   addToCart(): void {
     this.cartService.addToCart(this.product);

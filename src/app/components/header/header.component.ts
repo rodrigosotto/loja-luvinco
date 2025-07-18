@@ -1,4 +1,3 @@
-// src/app/components/header/header.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Inject } from '@angular/core';
 import { ThemeService } from './../../services/theme.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,10 @@ import { ThemeService } from './../../services/theme.service';
 export class HeaderComponent implements OnInit {
   isDarkMode: boolean = false;
 
-  constructor(@Inject(ThemeService) private themeService: ThemeService) {}
+  constructor(
+    @Inject(ThemeService) private readonly themeService: ThemeService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isDarkMode = this.themeService.isDarkMode();
@@ -26,5 +29,9 @@ export class HeaderComponent implements OnInit {
   toggleTheme(): void {
     this.isDarkMode = !this.isDarkMode;
     this.themeService.setDarkMode(this.isDarkMode);
+  }
+
+  logout(): void {
+    this.router.navigate(['/logout']);
   }
 }

@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-list',
@@ -40,7 +41,10 @@ export class ProductListComponent implements OnInit {
   selectedMarca = '';
   lastUpdated: Date | null = null;
   isLoading = false;
-  constructor(private productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.loadProducts();
@@ -61,8 +65,14 @@ export class ProductListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        //adicionar um alert para informar o usuario que ocorreu um problema ao carregar produtos
-        console.error('Erro ao carregar produtos', error);
+        this.snackBar.open(
+          'Para este desafio, não foi solicitado página do CHECKOUT',
+          'Fechar',
+          {
+            duration: 5000,
+          }
+        ),
+          console.error('Erro ao carregar produtos', error);
         this.isLoading = false;
       },
     });

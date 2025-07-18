@@ -4,6 +4,7 @@ import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './guards/auth.guard';
+import { LogoutComponent } from './components/logout/logout.component';
 
 export const routes: Routes = [
   {
@@ -15,13 +16,14 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'logout', component: LogoutComponent },
   {
-    path: 'products',
+    path: 'produtos',
     component: ProductListComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'cart',
+    path: 'carrinho',
     component: CartPageComponent,
     canActivate: [authGuard],
   },

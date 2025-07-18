@@ -1,4 +1,3 @@
-// error.interceptor.ts
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -12,7 +11,7 @@ import { MessageService } from '../services/message.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private messageService: MessageService) {}
+  constructor(private readonly messageService: MessageService) {}
 
   intercept(
     request: HttpRequest<unknown>,

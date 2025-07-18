@@ -1,20 +1,14 @@
-
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-/* Importe apenas o que precisa */
 @use '@angular/material' as mat;
 
-/* Inclua apenas o core (obrigatório) */
 @include mat.core();
 
-/* Estilos globais básicos */
 html,
 body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Roboto", sans-serif;
 }
-// Tema escuro opcional
+
 .dark-theme {
   background-color: #303030;
   color: white;
@@ -25,24 +19,23 @@ body {
       border: 1px solid #555;
 
       .price {
-        color: #bb86fc; // Roxo claro para preços
+        color: #bb86fc;
       }
 
       .brand {
-        color: #b3e5fc; // Azul claro para marcas
+        color: #b3e5fc;
       }
 
       .mat-raised-button {
-        background-color: #bb86fc; // Roxo Material Design dark
+        background-color: #bb86fc;
         color: #000;
       }
 
       .unavailable {
-        color: #ff8a80; // Vermelho claro para indisponível
+        color: #ff8a80;
       }
     }
 
-    // Botões do carrinho no rodapé
     .cart-summary {
       background-color: #424242;
       border-top: 1px solid #555;
@@ -50,7 +43,7 @@ body {
       button {
         &.mat-raised-button {
           &[color="primary"] {
-            background-color: #3700b3; // Azul mais escuro
+            background-color: #3700b3;
             color: white;
           }
 
@@ -62,7 +55,7 @@ body {
       }
     }
 }
-// Transições suaves para o tema
+
 .mat-card,
 .cart-summary,
 button {
