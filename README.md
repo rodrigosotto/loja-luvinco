@@ -8,7 +8,7 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 
 ## 🚀 A aplicação também esta na vercel você pode testar
 
-> 💡 https://loja-luvicon.vercel.app/login
+> 💡 https://loja-luvicon.vercel.app/
 
 - LOGIN: adm@testedesafio.com
 - SENHA: admin123
