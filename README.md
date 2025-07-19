@@ -6,7 +6,12 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 
 ![Demo da aplicação](./caminho/para/imagem.png)
 
-> 💡 _Print da aplicação em funcionamento — você pode substituir pelo caminho real da imagem acima no repositório._
+## 🚀 A aplicação também esta na vercel você pode testar
+
+> 💡 https://loja-luvicon.vercel.app/login
+
+- LOGIN: adm@testedesafio.com
+- SENHA: admin123
 
 ---
 
@@ -34,6 +39,10 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 ---
 
 ## 🧰 Instalação e uso
+
+- Angular 16+
+- Node 20.0.0+
+- NPM 10.9.1+
 
 ### 1. Clonar o repositório
 
