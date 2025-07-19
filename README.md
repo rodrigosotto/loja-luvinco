@@ -8,7 +8,7 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 
 ## 🚀 A aplicação também esta na vercel você pode testar
 
-> 💡 https://loja-luvinco.vercel.app/
+> 💡 https://desafio-luvinco.vercel.app/
 
 - LOGIN: adm@testedesafio.com
 - SENHA: admin123
@@ -47,8 +47,8 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/rodrigosotto/loja-luvicon.git
-cd loja-luvicon
+git clone https://github.com/rodrigosotto/loja-luvicon
+cd loja-luvinco
 npm install
 ng serve --open
 ```
