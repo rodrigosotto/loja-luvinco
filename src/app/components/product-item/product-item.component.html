@@ -1,16 +1,14 @@
 <mat-card class="product-card">
   @if (product) {
-<div class="image-container">
-  <img [src]="getSafeImage(product.imagem)" alt="{{ product.nome }}" (error)="handleImageError($event)"
-    (load)="handleImageLoad()" class="product-image" [class.hidden]="isImageLoading" />
+  <div class="image-container">
+    <img [src]="getSafeImage(product.imagem)" alt="{{ product.nome }}" (error)="handleImageError($event)"
+      (load)="handleImageLoad()" class="product-image" [class.hidden]="isImageLoading" />
 
     @if (isImageLoading) {
-<div class="image-skeleton"></div>
+    <div class="image-skeleton"></div>
     }
 
-</div>
-
-
+  </div>
 
   <mat-card-content>
     <h3>{{ product.nome }}</h3>

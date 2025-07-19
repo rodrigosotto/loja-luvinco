@@ -11,7 +11,16 @@
           <th mat-header-cell *matHeaderCellDef>Produto</th>
           <td mat-cell *matCellDef="let item">
             <div class="product-info">
-              <img [src]="item.product.imageUrl" alt="{{ item.product.name }}">
+              <div class="image-container">
+                <img [src]="getSafeImage(item.product.imagem)" alt="{{ item.product.nome }}" (error)="handleImageError($event)"
+                  (load)="handleImageLoad()" class="product-image" [class.hidden]="isImageLoading" />
+
+                @if (isImageLoading) {
+                <div class="image-skeleton"></div>
+                }
+
+              </div>
+              <!-- <img [src]="item.product.imageUrl" alt="{{ item.product.name }}"> -->
               <div>
                 <h3>{{ item.product.name }}</h3>
                 <p>{{ item.product.brand }}</p>

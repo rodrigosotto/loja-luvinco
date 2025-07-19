@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -31,13 +31,34 @@ export class CartPageComponent {
     'total',
     'actions',
   ];
+  placeholderImage = 'assets/images/placeholder.png';
+  isImageLoading = true;
 
   constructor(
     public readonly cartService: CartService,
     private readonly router: Router,
     private readonly snackBar: MatSnackBar,
-    private readonly orderService: OrderService
+    private readonly orderService: OrderService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
+
+  getSafeImage(url: string | null | undefined): string {
+    return url ? `/api/images/${url}` : this.placeholderImage;
+  }
+
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.placeholderImage;
+    imgElement.onerror = null;
+    this.isImageLoading = false;
+  }
+
+  handleImageLoad() {
+    setTimeout(() => {
+      this.isImageLoading = false;
+      this.cdr.detectChanges();
+    });
+  }
 
   getTotal(): number {
     return this.cartService
@@ -67,7 +88,7 @@ export class CartPageComponent {
       .subscribe(
         (order: any) => {
           this.snackBar.open(
-            `Pedido #${order.id} realizado com sucesso!`,
+            `Pedido #${order.pedidoId} realizado com sucesso!`,
             'Fechar',
             { duration: 5000, panelClass: ['success-snackbar'] }
           );
