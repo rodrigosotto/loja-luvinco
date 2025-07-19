@@ -40,4 +40,6 @@ Aplicação web desenvolvida em Angular para simular uma loja virtual simples, c
 ```bash
 git clone https://github.com/rodrigosotto/loja-luvicon.git
 cd loja-luvicon
+npm install
+ng serve --open
 ```
