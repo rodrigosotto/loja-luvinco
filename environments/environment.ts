@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://bff-luvinco.onrender.com/api',
-  authAPiUrl: 'https://bff-luvinco.onrender.com/api/auth',
+  apiUrl: 'http://localhost:3000/api',
+  authAPiUrl: 'http://localhost:3000/api/auth',
 };

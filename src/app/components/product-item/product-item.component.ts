@@ -35,9 +35,12 @@ export class ProductItemComponent {
     this.cartService.addToCart(this.product);
   }
 
-  getSafeImage(url: string | null | undefined): string {
-    return url ? `/api/images/${url}` : this.placeholderImage;
-  }
+getSafeImage(url: string | null | undefined): string {
+  if (!url) return this.placeholderImage;
+
+  const isExternal = url.startsWith('http://') || url.startsWith('https://');
+  return isExternal ? url : `/api/images/${url}`;
+}
 
   handleImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
