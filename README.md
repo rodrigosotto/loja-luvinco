@@ -1,4 +1,4 @@
-# 🛍️ Loja Luvicon
+# 🛍️ Loja Luvinco (Desafio)
 
 Aplicação web desenvolvida em Angular para simular uma loja virtual simples, com funcionalidades de listagem de produtos, filtragem por marca, carrinho de compras e finalização de pedidos.
 
