@@ -45,8 +45,10 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   marcas: string[] = [];
+  categorias: string[] = [];
   searchTerm = '';
   selectedMarca = '';
+  selectedCategoria = '';
   lastUpdated: Date | null = null;
   isLoading = false;
   constructor(
@@ -63,6 +65,7 @@ export class ProductListComponent implements OnInit {
     this.products = [];
     this.filteredProducts = [];
     this.marcas = [];
+    this.categorias = [];
 
     const source$ = forceRefresh
       ? this.productService.forceRefresh()
@@ -97,6 +100,7 @@ export class ProductListComponent implements OnInit {
         this.products = products;
         this.filteredProducts = products;
         this.marcas = [...new Set(products.map((p) => p.marca))];
+        this.categorias = [...new Set(products.map((p) => p.categoria))];
         this.lastUpdated = new Date();
       });
   }
@@ -106,10 +110,13 @@ export class ProductListComponent implements OnInit {
       const matchesSearch = product.nome
         .toLowerCase()
         .includes(this.searchTerm.toLowerCase());
-      const matchesmarca = this.selectedMarca
+      const matchesMarca = this.selectedMarca
         ? product.marca === this.selectedMarca
         : true;
-      return matchesSearch && matchesmarca;
+      const matchesCategoria = this.selectedCategoria
+        ? product.categoria === this.selectedCategoria
+        : true;
+      return matchesSearch && matchesMarca && matchesCategoria;
     });
   }
 }

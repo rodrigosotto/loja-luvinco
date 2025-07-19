@@ -34,7 +34,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 0;
 
       h1 {
         color: #212023
@@ -43,10 +43,11 @@
       .refresh-controls {
         display: flex;
         align-items: center;
+        flex-direction: column;
         gap: 10px;
 
         small {
-          color: #666;
+          color: #212023
         }
       }
     }
