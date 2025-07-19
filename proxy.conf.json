@@ -1,0 +1,10 @@
+{
+  "/api/images": {
+    "target": "https://example.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/images": ""
+    }
+  }
+}

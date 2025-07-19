@@ -5,7 +5,6 @@ import { ProductItemComponent } from '../product-item/product-item.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-// Angular Material modules
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,6 +13,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  catchError,
+  delayWhen,
+  of,
+  retryWhen,
+  take,
+  timeout,
+  timer,
+} from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -50,35 +58,50 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts(forceRefresh = false): void {
+  loadProducts(forceRefresh = false) {
     this.isLoading = true;
+    this.products = [];
+    this.filteredProducts = [];
+    this.marcas = [];
 
-    (forceRefresh
+    const source$ = forceRefresh
       ? this.productService.forceRefresh()
-      : this.productService.getProducts()
-    ).subscribe({
-      next: (products) => {
+      : this.productService.getProducts();
+
+    source$
+      .pipe(
+        timeout(5000),
+        retryWhen((errors) =>
+          errors.pipe(
+            delayWhen(() => timer(1000)),
+            take(3)
+          )
+        ),
+        catchError((err) => {
+          this.isLoading = false;
+          this.snackBar.open(
+            'Produtos não foram carregados. Tente novamente mais tarde.',
+            'Fechar',
+            {
+              duration: 6000,
+            }
+          );
+          return of(null);
+        })
+      )
+      .subscribe((products) => {
+        this.isLoading = false;
+
+        if (!products) return;
+
         this.products = products;
         this.filteredProducts = products;
         this.marcas = [...new Set(products.map((p) => p.marca))];
         this.lastUpdated = new Date();
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.snackBar.open(
-          'Para este desafio, não foi solicitado página do CHECKOUT',
-          'Fechar',
-          {
-            duration: 5000,
-          }
-        ),
-          console.error('Erro ao carregar produtos', error);
-        this.isLoading = false;
-      },
-    });
+      });
   }
 
-  applyFilters(): void {
+  applyFilters() {
     this.filteredProducts = this.products.filter((product) => {
       const matchesSearch = product.nome
         .toLowerCase()

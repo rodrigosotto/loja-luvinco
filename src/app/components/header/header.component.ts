@@ -22,16 +22,16 @@ export class HeaderComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.isDarkMode = this.themeService.isDarkMode();
   }
 
-  toggleTheme(): void {
+  toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     this.themeService.setDarkMode(this.isDarkMode);
   }
 
-  logout(): void {
+  logout() {
     this.router.navigate(['/logout']);
   }
 }

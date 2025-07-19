@@ -43,7 +43,7 @@ export class CartService {
     }
   }
 
-  private salveCart(cart: CartItem[]): void {
+  private salveCart(cart: CartItem[]) {
     localStorage.setItem(this.KEY_LOCAL_STORAGE, JSON.stringify(cart));
     this.cartItemsSubject.next(cart);
   }
@@ -56,7 +56,7 @@ export class CartService {
     );
   }
 
-  checkChangeDay(): void {
+  checkChangeDay() {
     const agora = new Date();
     const ultimaVerificacaoStr = localStorage.getItem(
       this.LATEST_VERIFICATION_KEY
@@ -78,7 +78,7 @@ export class CartService {
     }
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: Product) {
     const currentItems = this.cartItemsSubject.value;
     const existingItem = currentItems.find(
       (item) => item.product.id === product.id
@@ -96,14 +96,14 @@ export class CartService {
     this.salveCart([...currentItems]);
   }
 
-  removeFromCart(productId: number): void {
+  removeFromCart(productId: number) {
     const updatedItems = this.cartItemsSubject.value.filter(
       (item) => item.product.id !== productId
     );
     this.salveCart(updatedItems);
   }
 
-  clearCart(): void {
+  clearCart() {
     this.salveCart([]);
   }
 
@@ -118,7 +118,7 @@ export class CartService {
     return [...this.cartItemsSubject.value];
   }
 
-  updateQuantity(productId: number, quantity: number): void {
+  updateQuantity(productId: number, quantity: number) {
     if (quantity < 1) {
       this.removeFromCart(productId);
       return;

@@ -27,11 +27,11 @@ export class LogoutComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.logout();
   }
 
-  logout(): void {
+  logout() {
     setTimeout(() => {
       this.authService.logout();
       this.isLoading = false;

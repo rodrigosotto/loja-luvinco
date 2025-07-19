@@ -33,7 +33,7 @@ export class OrderSuccessComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.orderId = this.route.snapshot.paramMap.get('id') || '';
 
     if (this.orderId) {
@@ -52,7 +52,7 @@ export class OrderSuccessComponent implements OnInit {
     }
   }
 
-  continueShopping(): void {
+  continueShopping() {
     this.router.navigate(['/']);
   }
 

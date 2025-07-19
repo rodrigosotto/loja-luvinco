@@ -13,12 +13,12 @@ export class ThemeService {
     return savedMode ? JSON.parse(savedMode) : false;
   }
 
-  setDarkMode(isDarkMode: boolean): void {
+  setDarkMode(isDarkMode: boolean) {
     localStorage.setItem(this.darkModeKey, JSON.stringify(isDarkMode));
     this.applyTheme(isDarkMode);
   }
 
-  private applyTheme(isDarkMode: boolean): void {
+  private applyTheme(isDarkMode: boolean) {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
     } else {

@@ -42,7 +42,7 @@ export class ProductService {
     return null;
   }
 
-  private cacheProducts(products: Product[]): void {
+  private cacheProducts(products: Product[]) {
     const cacheData = {
       timestamp: new Date().toISOString(),
       products: products,

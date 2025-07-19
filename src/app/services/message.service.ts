@@ -9,17 +9,17 @@ export class MessageService {
   } | null>(null);
   messages$ = this.messageSubject.asObservable();
 
-  showSuccess(text: string): void {
+  showSuccess(text: string) {
     this.messageSubject.next({ text, type: 'success' });
     setTimeout(() => this.clearMessage(), 3000);
   }
 
-  showError(text: string): void {
+  showError(text: string) {
     this.messageSubject.next({ text, type: 'error' });
     setTimeout(() => this.clearMessage(), 5000);
   }
 
-  clearMessage(): void {
+  clearMessage() {
     this.messageSubject.next(null);
   }
 }
